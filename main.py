@@ -117,10 +117,12 @@ def comparing_numbers() -> int:
         ))
         gener_number = generate_numbers()
         if user_num > gener_number:
-            print("Sorry, not match. Try a smaller number")
+            print(f"Sorry, not match. God of random threw out the number {gener_number}"
+                  f" Try a smaller number")
             result -= 20
         elif user_num < gener_number:
-            print("Sorry, not match. Try a larger number")
+            print(f"Sorry, not match. God of random threw out the number {gener_number}"
+                  f" Try a larger number")
             result -= 20
         else:
             print("You lucky!")
