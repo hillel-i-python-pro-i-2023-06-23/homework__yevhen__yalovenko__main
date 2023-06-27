@@ -77,7 +77,7 @@ def gamers_usernames(gamers_amount:int) -> dict:
 
     def check_username_availability(username:str) -> bool:
         result = config.get(username)
-        if result ==  None:
+        if result == None:
             return True
         else:
             return None
@@ -132,5 +132,6 @@ def comparing_numbers() -> int:
 if __name__ == '__main__':
     welcome_page()
     gamers_amount()
-    gamers_usernames(config.get("gamers"))
+    #gamers_usernames(config.get("gamers"))
 
+    comparing_numbers()
