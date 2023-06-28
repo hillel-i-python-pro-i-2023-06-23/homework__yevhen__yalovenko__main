@@ -9,9 +9,9 @@ def welcome_message():
        We happy to see you in our greatest game "GUESS THE NUMBER"!
        Rules very easy: 
        You must to guess the number from 0 to 100.
-       You have 5 attempts!
+       You have 10 attempts!
        If you're enter non correct number - game inform about it.
-       You have 100 points at start and wrong attempt cost -20 point.
+       You have 100 points at start and wrong attempt cost -10 point.
        Good luck!!!
        """
     print(message)
@@ -35,7 +35,7 @@ def validate_number(number):
 
 
 def generate_numbers():
-    gener_number = random.randint(0, 5)
+    gener_number = random.randint(0, 100)
     return gener_number
 
 
@@ -45,7 +45,7 @@ def comparing_numbers(player_name):
 
     """
     result = 100
-    tries = 5
+    tries = 10
     generated_number = generate_numbers()
 
     while tries > 0:
@@ -56,12 +56,12 @@ def comparing_numbers(player_name):
         elif user_number > generated_number:
             print("Sorry, it's not a match. The random god is not on your side."
                   " Try a smaller number.")
-            result -= 20
+            result -= 10
             tries -= 1
         elif user_number < generated_number:
             print("Sorry, it's not a match. The random god is not on your side."
                   " Try a larger number.")
-            result -= 20
+            result -= 10
             tries -= 1
         else:
             win_tries: int = 6 - tries
@@ -71,7 +71,7 @@ def comparing_numbers(player_name):
 
         if tries == 0:
             print(f"GAME OVER, {player_name}! Try your luck another time. {emoji.emojize(':winking_face:')}")
-    return winner.append({player_name.upper(): win_tries})
+    return winner.append({player_name.upper(): win_tries, 'result': result})
 
 
 def start_game(players_num):
