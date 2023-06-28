@@ -22,6 +22,7 @@ def validate_number(number):
     :param number: user input
     :return: int or Error text
     """
+
     try:
         validated_number = int(number)
         return validated_number
