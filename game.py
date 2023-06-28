@@ -1,6 +1,8 @@
 import random
 import emoji
 
+winner = []
+
 
 def welcome_message():
     message = """
@@ -20,15 +22,16 @@ def validate_number(number):
     This function check user input and return integer if input is number
     or Error text
     :param number: user input
-    :return: int or Error text
+    :return: int or None
     """
 
-    try:
-        validated_number = int(number)
-        return validated_number
-    except ValueError as e:
-        print("Please enter the number, not literal")
-        return e
+    while True:
+        try:
+            validated_number = int(number)
+            return validated_number
+        except ValueError:
+            print("Please enter a number, not a letter or symbol.")
+            number = input("Enter a valid number: ")
 
 
 def generate_numbers():
@@ -43,30 +46,32 @@ def comparing_numbers(player_name):
     """
     result = 100
     tries = 5
-    gener_number = generate_numbers()
+    generated_number = generate_numbers()
 
-    while result > 0:
-        user_num = validate_number(input(f"Please, {player_name} specify the magic number: "))
+    while tries > 0:
+        user_number = validate_number(input(f"Please, {player_name} specify the magic number: "))
 
-        if type(user_num) == ValueError:
+        if user_number is None:
             continue
-        elif user_num > gener_number:
-            print(f"Sorry, not match. God of random not on your side"
-                  f" Try a smaller number")
+        elif user_number > generated_number:
+            print("Sorry, it's not a match. The random god is not on your side."
+                  " Try a smaller number.")
             result -= 20
             tries -= 1
-        elif user_num < gener_number:
-            print(f"Sorry, not match. God of random not on your side"
-                  f" Try a larger number")
+        elif user_number < generated_number:
+            print("Sorry, it's not a match. The random god is not on your side."
+                  " Try a larger number.")
             result -= 20
             tries -= 1
         else:
-            win_tries = 6 - tries
-            print(f"{emoji.emojize(':star-struck:')} You lucky! {emoji.emojize(':star-struck:')} "
-                  f"You guessed it, it's in {win_tries} tries")
+            win_tries: int = 6 - tries
+            print(f"{emoji.emojize(':star-struck:')} You're lucky! {emoji.emojize(':star-struck:')} "
+                  f"You guessed it right in {win_tries} tries.")
             break
-    if result <= 0:
-        print(f"GAME OVER {player_name}! Try your luck another time {emoji.emojize(':winking_face:')}")
+
+        if tries == 0:
+            print(f"GAME OVER, {player_name}! Try your luck another time. {emoji.emojize(':winking_face:')}")
+    return winner.append({player_name.upper(): win_tries})
 
 
 def start_game(players_num):
@@ -76,16 +81,17 @@ def start_game(players_num):
     :param players_num: number of players (int)
     """
     players = []
-    current_player = 0
 
     for i in range(1, players_num + 1):
         players_name = input(f"Enter nickname of Player {i}: ")
         players.append(players_name)
 
+    current_player = 0
+
     while True:
-        num_players = len(players)
-        current_player = (current_player + 1) % num_players
         comparing_numbers(players[current_player])
+
+        current_player = (current_player + 1) % players_num
 
         if current_player == 0:
             break
@@ -94,4 +100,8 @@ def start_game(players_num):
 if __name__ == '__main__':
     welcome_message()
     players_num = validate_number(input("Please enter the number of players: "))
-    start_game(players_num)
+
+    if players_num is not None:
+        start_game(players_num)
+
+    print(f"Our winners today is {winner}")
