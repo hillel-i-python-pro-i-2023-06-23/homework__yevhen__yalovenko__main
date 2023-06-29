@@ -64,7 +64,7 @@ def comparing_numbers(player_name):
             result -= 10
             tries -= 1
         else:
-            win_tries: int = 6 - tries
+            win_tries: int = 11 - tries
             print(f"{emoji.emojize(':star-struck:')} You're lucky! {emoji.emojize(':star-struck:')} "
                   f"You guessed it right in {win_tries} tries.")
             break
