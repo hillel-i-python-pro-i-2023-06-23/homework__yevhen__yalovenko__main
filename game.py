@@ -67,11 +67,17 @@ def comparing_numbers(player_name):
             win_tries: int = 11 - tries
             print(f"{emoji.emojize(':star-struck:')} You're lucky! {emoji.emojize(':star-struck:')} "
                   f"You guessed it right in {win_tries} tries.")
-            break
+            return winner.append({'Player': player_name.upper(), 'Tries': win_tries, 'Result': result})
 
         if tries == 0:
             print(f"GAME OVER, {player_name}! Try your luck another time. {emoji.emojize(':winking_face:')}")
-    return winner.append({player_name.upper(): win_tries, 'result': result})
+
+
+def unpack_winner(winner_list):
+    for el in winner_list:
+        print(f"Our {winner_list.index(el) + 1} winner is:")
+        for k, v in el.items():
+            print(k, v)
 
 
 def start_game(players_num):
@@ -104,4 +110,4 @@ if __name__ == '__main__':
     if players_num is not None:
         start_game(players_num)
 
-    print(f"Our winners today is {winner}")
+    unpack_winner(winner) if len(winner) > 0 else print("No winners today")
