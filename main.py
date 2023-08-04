@@ -27,7 +27,8 @@ def welcome_page() -> None:
     """
     print(message)
 
-def number_input(message:str) -> int:
+
+def number_input(message: str) -> int:
     """
     Request for number. Check entered data validity
     and re-asking input if data not valid
@@ -99,6 +100,7 @@ def gamers_usernames(gamers_amount:int) -> dict:
 
         number_of_gamer += 1
 
+
 def generate_numbers():
     gener_number = random.randint(0, 100)
     return gener_number
@@ -107,7 +109,6 @@ def generate_numbers():
 def comparing_numbers() -> int:
     """
     Сompares the user's numbers and the generated numbers to determine the user's score
-    :param gener_number: The entered number and the generated number
     :return: Players result
     """
     result = 100
